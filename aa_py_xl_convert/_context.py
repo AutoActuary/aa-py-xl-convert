@@ -21,14 +21,14 @@ def converted_to_xlsx_if_necessary(input_path: Path) -> Generator[Path, None, No
         The original path if the file is already in xlsx format, otherwise the path to the converted file.
         The converted file is removed when the context manager exits.
     """
-    if input_path.suffix.lower() == ".xlsx":
+    if input_path.suffix.lower() not in [".xlsx", ".xlsm"]:
         yield input_path
     else:
         with TemporaryDirectory() as tmp_dir_str:
             output_path = Path(tmp_dir_str, f"{input_path.stem}.xlsx")
             logger.warning(
                 f"Converting file from `{input_path.suffix}` to `.xlsx` format. "
-                "For better performance, use only `.xlsx` files."
+                "For better performance, use only `.xlsx` or `.xlsm` files."
             )
             convert_to_xlsx_using_vbscript(input_path, output_path)
             yield output_path
