@@ -16,12 +16,8 @@ def convert_to_xlsx_using_vbscript(input_path: Path, output_path: Path) -> None:
     input_path = input_path.resolve()
 
     # `subprocess.CREATE_NO_WINDOW` can only be imported on Windows.
-    flags: int
-    try:
-        from subprocess import CREATE_NO_WINDOW
-    except ImportError:
-        # noinspection PyPep8Naming
-        CREATE_NO_WINDOW = 134217728
+    # noinspection PyPep8Naming
+    CREATE_NO_WINDOW = 134217728
 
     run(
         args=[
