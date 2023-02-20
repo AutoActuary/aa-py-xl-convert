@@ -1,5 +1,5 @@
 from pathlib import Path
-from subprocess import run, CREATE_NO_WINDOW
+from subprocess import run
 
 from locate import this_dir
 
@@ -14,6 +14,14 @@ def convert_to_xlsx_using_vbscript(input_path: Path, output_path: Path) -> None:
     """
     output_path = output_path.resolve()
     input_path = input_path.resolve()
+
+    # `subprocess.CREATE_NO_WINDOW` can only be imported on Windows.
+    flags: int
+    try:
+        from subprocess import CREATE_NO_WINDOW
+    except ImportError:
+        # noinspection PyPep8Naming
+        CREATE_NO_WINDOW = 134217728
 
     run(
         args=[
