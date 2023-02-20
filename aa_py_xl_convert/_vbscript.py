@@ -1,5 +1,5 @@
 from pathlib import Path
-from subprocess import run
+from subprocess import run, CREATE_NO_WINDOW
 
 from locate import this_dir
 
@@ -24,6 +24,7 @@ def convert_to_xlsx_using_vbscript(input_path: Path, output_path: Path) -> None:
             str(output_path),
         ],
         check=True,
+        creationflags=CREATE_NO_WINDOW
     )
 
     # The VBScript does not set an exit code if it fails, so we have to check if the output file exists.
