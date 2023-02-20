@@ -21,7 +21,7 @@ def converted_to_xlsx_if_necessary(input_path: Path) -> Generator[Path, None, No
         The original path if the file is already in xlsx format, otherwise the path to the converted file.
         The converted file is removed when the context manager exits.
     """
-    if input_path.suffix.lower() not in [".xlsx", ".xlsm"]:
+    if input_path.suffix.lower() in [".xlsx", ".xlsm"]:
         yield input_path
     else:
         with TemporaryDirectory() as tmp_dir_str:
