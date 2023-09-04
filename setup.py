@@ -26,6 +26,7 @@ setuptools.setup(
     ],
     install_requires=[
         "locate>=1.1.1,==1.*",
+        "retry>=0.9.2,==0.9.*",
     ],
     package_data={
         "": [
