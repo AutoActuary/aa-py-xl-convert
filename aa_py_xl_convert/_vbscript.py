@@ -1,9 +1,11 @@
 from pathlib import Path
 from subprocess import run
 
+from retry import retry
 from locate import this_dir
 
 
+@retry(tries=3, delay=2, backoff=2)
 def convert_to_xlsx_using_vbscript(input_path: Path, output_path: Path) -> None:
     """
     Use a VBS script to convert a file to xlsx format.
