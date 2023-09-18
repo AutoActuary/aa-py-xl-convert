@@ -5,7 +5,7 @@ from retry import retry
 from locate import this_dir
 
 
-@retry(tries=3, delay=2, backoff=2)
+@retry(tries=10, delay=2, backoff=2, jitter=(1, 3), max_delay=10)
 def convert_to_xlsx_using_vbscript(input_path: Path, output_path: Path) -> None:
     """
     Use a VBS script to convert a file to xlsx format.
